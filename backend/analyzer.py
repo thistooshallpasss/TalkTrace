@@ -1,4 +1,9 @@
 # backend/analyzer.py
+
+import nltk
+nltk.data.path.append('./nltk_data') # Tell NLTK to look in this folder
+
+
 from collections import Counter
 import pandas as pd
 from wordcloud import WordCloud

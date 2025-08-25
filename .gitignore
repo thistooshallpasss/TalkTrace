@@ -1,0 +1,8 @@
+# Node dependencies
+/frontend/node_modules
+
+# Python virtual environment
+/backend/venv
+
+# NLTK data folder
+/backend/nltk_data
