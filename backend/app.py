@@ -6,8 +6,9 @@ import analyzer
 import traceback 
 
 app = Flask(__name__)
-# Add your Vercel URL to the list
-CORS(app, resources={r"/analyze": {"origins": ["http://localhost:3000", "https://talk-trace.vercel.app/"]}})
+# UPDATED LINE: This now allows requests from any origin (*).
+# This is the most reliable way to fix CORS issues in deployment.
+CORS(app, resources={r"/analyze": {"origins": "*"}})
 
 @app.route('/analyze', methods=['POST'])
 def analyze_chat():
