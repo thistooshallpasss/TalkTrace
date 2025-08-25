@@ -6,7 +6,8 @@ import analyzer
 import traceback 
 
 app = Flask(__name__)
-CORS(app, resources={r"/analyze": {"origins": "http://localhost:3000"}})
+# Add your Vercel URL to the list
+CORS(app, resources={r"/analyze": {"origins": ["http://localhost:3000", "https://talk-trace.vercel.app/"]}})
 
 @app.route('/analyze', methods=['POST'])
 def analyze_chat():
