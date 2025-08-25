@@ -79,7 +79,7 @@ function App() {
     const selectedFile = e.target.files[0];
     if (selectedFile) {
       setFile(selectedFile);
-      setAnalysisData(null); 
+      setAnalysisData(null);
       setSelectedUser('Overall');
     }
   };
@@ -90,13 +90,13 @@ function App() {
     if (!file) return;
     setLoading(true);
     setError('');
-    
+
     const formData = new FormData();
     formData.append('chatFile', file);
     formData.append('user', currentUser);
 
     try {
-      const response = await axios.post('http://127.0.0.1:5000/analyze', formData, {
+      const response = await axios.post('https://talktrace-backend.onrender.com/analyze', formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
       });
       setAnalysisData(response.data);
@@ -124,7 +124,7 @@ function App() {
         <h1>TalkTrace</h1>
         <p>Your WhatsApp Chat Analyzer</p>
       </header>
-      
+
       <main>
         <div className="upload-section">
           <h2>Upload your WhatsApp Chat File (.txt)</h2>
@@ -174,61 +174,61 @@ function App() {
               <div className="chart-container">
                 <h3>Most Common Words</h3>
                 <ResponsiveContainer width="100%" height={300}>
-                   <BarChart data={analysisData.common_words} layout="vertical" margin={{ top: 5, right: 20, left: 40, bottom: 5 }}>
-                      <CartesianGrid strokeDasharray="3 3" />
-                      <XAxis type="number" />
-                      <YAxis type="category" dataKey="word" width={60} />
-                      <Tooltip formatter={(value, name) => (name === 'percent' ? `${value}%` : value)} />
-                      <Legend />
-                      <Bar dataKey="count" fill="#8884d8" />
+                  <BarChart data={analysisData.common_words} layout="vertical" margin={{ top: 5, right: 20, left: 40, bottom: 5 }}>
+                    <CartesianGrid strokeDasharray="3 3" />
+                    <XAxis type="number" />
+                    <YAxis type="category" dataKey="word" width={60} />
+                    <Tooltip formatter={(value, name) => (name === 'percent' ? `${value}%` : value)} />
+                    <Legend />
+                    <Bar dataKey="count" fill="#8884d8" />
                   </BarChart>
                 </ResponsiveContainer>
               </div>
             </div>
 
             <div className="chart-container">
-                <h3>Sentiment Over Time</h3>
-                <ResponsiveContainer width="100%" height={300}>
-                    <LineChart data={analysisData.sentiment_timeline}>
-                        <CartesianGrid strokeDasharray="3 3" />
-                        <XAxis dataKey="month_year" />
-                        <YAxis />
-                        <Tooltip />
-                        <Legend />
-                        <Line type="monotone" dataKey="Positive" stroke="#4CAF50" />
-                        <Line type="monotone" dataKey="Negative" stroke="#F44336" />
-                        <Line type="monotone" dataKey="Neutral" stroke="#FFC107" />
-                    </LineChart>
-                </ResponsiveContainer>
+              <h3>Sentiment Over Time</h3>
+              <ResponsiveContainer width="100%" height={300}>
+                <LineChart data={analysisData.sentiment_timeline}>
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="month_year" />
+                  <YAxis />
+                  <Tooltip />
+                  <Legend />
+                  <Line type="monotone" dataKey="Positive" stroke="#4CAF50" />
+                  <Line type="monotone" dataKey="Negative" stroke="#F44336" />
+                  <Line type="monotone" dataKey="Neutral" stroke="#FFC107" />
+                </LineChart>
+              </ResponsiveContainer>
             </div>
-            
+
             <div className="chart-grid">
-                <div className="chart-container">
-                    <h3>Average Message Length (Words)</h3>
-                    <ResponsiveContainer width="100%" height={300}>
-                        <BarChart data={analysisData.avg_message_length}>
-                            <CartesianGrid strokeDasharray="3 3" />
-                            <XAxis dataKey="user" />
-                            <YAxis />
-                            <Tooltip />
-                            <Legend />
-                            <Bar dataKey="avg_length" fill="#00C49F" name="Avg. Words"/>
-                        </BarChart>
-                    </ResponsiveContainer>
-                </div>
-                <div className="chart-container">
-                    <h3>Most Used Emojis</h3>
-                    <ResponsiveContainer width="100%" height={300}>
-                        <BarChart data={analysisData.emoji_stats} layout="vertical" margin={{ top: 5, right: 20, left: 40, bottom: 5 }}>
-                            <CartesianGrid strokeDasharray="3 3" />
-                            <XAxis type="number" />
-                            <YAxis type="category" dataKey="emoji" width={60} />
-                            <Tooltip formatter={(value, name) => (name === 'percent' ? `${value}%` : value)} />
-                            <Legend />
-                            <Bar dataKey="count" fill="#FFBB28" />
-                        </BarChart>
-                    </ResponsiveContainer>
-                </div>
+              <div className="chart-container">
+                <h3>Average Message Length (Words)</h3>
+                <ResponsiveContainer width="100%" height={300}>
+                  <BarChart data={analysisData.avg_message_length}>
+                    <CartesianGrid strokeDasharray="3 3" />
+                    <XAxis dataKey="user" />
+                    <YAxis />
+                    <Tooltip />
+                    <Legend />
+                    <Bar dataKey="avg_length" fill="#00C49F" name="Avg. Words" />
+                  </BarChart>
+                </ResponsiveContainer>
+              </div>
+              <div className="chart-container">
+                <h3>Most Used Emojis</h3>
+                <ResponsiveContainer width="100%" height={300}>
+                  <BarChart data={analysisData.emoji_stats} layout="vertical" margin={{ top: 5, right: 20, left: 40, bottom: 5 }}>
+                    <CartesianGrid strokeDasharray="3 3" />
+                    <XAxis type="number" />
+                    <YAxis type="category" dataKey="emoji" width={60} />
+                    <Tooltip formatter={(value, name) => (name === 'percent' ? `${value}%` : value)} />
+                    <Legend />
+                    <Bar dataKey="count" fill="#FFBB28" />
+                  </BarChart>
+                </ResponsiveContainer>
+              </div>
             </div>
 
             {analysisData.wordcloud && (
