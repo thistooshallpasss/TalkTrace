@@ -1,10 +1,3 @@
-Got it 👍 I’ll polish your **README.md** into a clean, professional, GitHub-ready format.
-
-Here’s the properly formatted version:
-
----
-
-````markdown
 # TalkTrace 💬 | WhatsApp Chat Analyzer
 
 **TalkTrace** is a full-stack web application that transforms your raw WhatsApp chat history into a beautiful, interactive analytics dashboard.  
@@ -79,7 +72,8 @@ python -c "import nltk; nltk.download('vader_lexicon')"
 
 # Run the Flask server
 python app.py
-````
+```
+
 
 Backend will run at **[http://127.0.0.1:5000](http://127.0.0.1:5000)**
 
